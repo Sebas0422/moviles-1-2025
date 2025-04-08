@@ -70,7 +70,6 @@ class NotaAdapter(
             binding.lblTitle.text = item.title
             binding.txtContent.setText(item.content)
             binding.checkBox.isChecked = item.isChecked
-            setupEventListeners(item, listener)
             if (item.isChecked) {
                 binding.lblTitle.paintFlags =
                     binding.lblTitle.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
@@ -82,43 +81,73 @@ class NotaAdapter(
                 binding.txtContent.paintFlags =
                     binding.txtContent.paintFlags and android.graphics.Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
+            binding.root.setBackgroundColor(item.color)
+            setupEventListeners(item, listener)
         }
 
         private fun setupEventListeners(item: Nota, listener: OnNotaClickListener) {
-            binding.btnRed.setOnClickListener { binding.root.setBackgroundColor(Color.parseColor("#F44336")) }
+            binding.btnRed.setOnClickListener {
+                listener.onNotaColorClickListener(
+                    item,
+                    Color.parseColor("#F44336")
+                )
+            }
             binding.btnOrange.setOnClickListener {
-                binding.root.setBackgroundColor(
-                    Color.parseColor(
-                        "#FF9800"
-                    )
+                listener.onNotaColorClickListener(
+                    item,
+                    Color.parseColor("#FF9800")
                 )
             }
             binding.btnPurple.setOnClickListener {
-                binding.root.setBackgroundColor(
-                    Color.parseColor(
-                        "#9C27B0"
-                    )
+                listener.onNotaColorClickListener(
+                    item,
+                    Color.parseColor("#9C27B0")
                 )
             }
             binding.btnLightBlue.setOnClickListener {
-                binding.root.setBackgroundColor(
-                    Color.parseColor(
+                listener.onNotaColorClickListener(
+                    item, Color.parseColor(
                         "#40C4FF"
                     )
                 )
             }
-            binding.btnBlue.setOnClickListener { binding.root.setBackgroundColor(Color.parseColor("#536DFE")) }
-            binding.btnPink.setOnClickListener { binding.root.setBackgroundColor(Color.parseColor("#FF69DF")) }
-            binding.btnCyan.setOnClickListener { binding.root.setBackgroundColor(Color.parseColor("#64FFDA")) }
-            binding.btnLime.setOnClickListener { binding.root.setBackgroundColor(Color.parseColor("#B2FF59")) }
+            binding.btnBlue.setOnClickListener {
+                listener.onNotaColorClickListener(
+                    item,
+                    Color.parseColor("#536DFE")
+                )
+            }
+            binding.btnPink.setOnClickListener {
+                listener.onNotaColorClickListener(
+                    item,
+                    Color.parseColor("#FF69DF")
+                )
+            }
+            binding.btnCyan.setOnClickListener {
+                listener.onNotaColorClickListener(
+                    item,
+                    Color.parseColor("#64FFDA")
+                )
+            }
+            binding.btnLime.setOnClickListener {
+                listener.onNotaColorClickListener(
+                    item,
+                    Color.parseColor("#B2FF59")
+                )
+            }
             binding.btnDeepPurple.setOnClickListener {
-                binding.root.setBackgroundColor(
-                    Color.parseColor(
+                listener.onNotaColorClickListener(
+                    item, Color.parseColor(
                         "#E040FB"
                     )
                 )
             }
-            binding.btnGreen.setOnClickListener { binding.root.setBackgroundColor(Color.parseColor("#00BFA5")) }
+            binding.btnGreen.setOnClickListener {
+                listener.onNotaColorClickListener(
+                    item,
+                    Color.parseColor("#00BFA5")
+                )
+            }
             binding.btnDelete.setOnClickListener { listener.onNotaDeleteClickListener(item) }
             binding.btnEdit.setOnClickListener { listener.onNotaEditClickListener(item) }
             binding.checkBox.setOnClickListener {
@@ -142,5 +171,6 @@ class NotaAdapter(
     public interface OnNotaClickListener {
         fun onNotaEditClickListener(nota: Nota)
         fun onNotaDeleteClickListener(nota: Nota)
+        fun onNotaColorClickListener(item: Nota, parseColor: Int)
     }
 }

@@ -31,4 +31,8 @@ object NotaRepository {
         }
     }
 
+    fun getNotaById(id: Int): Nota? {
+        return notas.find { it.id == id }
+    }
+
 }

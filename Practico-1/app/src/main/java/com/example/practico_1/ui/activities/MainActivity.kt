@@ -69,4 +69,12 @@ class MainActivity : AppCompatActivity(), NotaAdapter.OnNotaClickListener {
         NotaRepository.deleteNota(nota)
         reloadData()
     }
+
+    override fun onNotaColorClickListener(item: Nota, parseColor: Int) {
+        NotaRepository.getNotaById(item.id)?.let {
+            it.color = parseColor
+            NotaRepository.saveNota(it)
+            reloadData()
+        }
+    }
 }
