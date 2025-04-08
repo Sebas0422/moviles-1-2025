@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnEdit"
+        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintTop_toTopOf="parent"
+        android:inputType="textMultiLine"/>
+
+    <TextView
+        android:id="@+id/txtContent"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Content"
+        app:layout_constraintEnd_toStartOf="@+id/btnDelete"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle" />
+
+    <ImageView
+        android:id="@+id/btnEdit"
+        android:layout_width="50dp"
+        android:layout_height="29dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <ImageView
+        android:id="@+id/btnDelete"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+    <Button
+        android:id="@+id/btnRed"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#F44336"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnOrange"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FF9800"
+        app:layout_constraintStart_toEndOf="@+id/btnRed"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnLightBlue"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#40C4FF"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/btnPurple"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnPink"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FF69DF"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/btnBlue"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnDeepPurple"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#E040FB"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/btnLime"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnGreen"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#00BFA5"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnDeepPurple"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnLime"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#B2FF59"
+        app:layout_constraintStart_toEndOf="@+id/btnCyan"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnCyan"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#64FFDA"
+        app:layout_constraintStart_toEndOf="@+id/btnPink"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnPurple"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#9C27B0"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/btnOrange"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+    <Button
+        android:id="@+id/btnBlue"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#536DFE"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/btnLightBlue"
+        app:layout_constraintTop_toBottomOf="@+id/txtContent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
