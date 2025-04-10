@@ -3,7 +3,7 @@ package com.example.practico_1.models
 import android.graphics.Color
 import java.io.Serializable
 
-class Nota (
+class Task (
     var id: Int,
     var title: String,
     var content: String,

@@ -4,16 +4,16 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.practico_1.databinding.NotaItemLayoutBinding
-import com.example.practico_1.models.Nota
+import com.example.practico_1.databinding.TaskItemLayoutBinding
+import com.example.practico_1.models.Task
 
-class NotaAdapter(
-    private var listNota: ArrayList<Nota>,
+class TaskAdapter(
+    private var listTask: ArrayList<Task>,
     private val listener: OnNotaClickListener
-) : RecyclerView.Adapter<NotaAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = NotaItemLayoutBinding.inflate(
+        val binding = TaskItemLayoutBinding.inflate(
             inflater,
             parent,
             false
@@ -22,38 +22,38 @@ class NotaAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listNota.size
+        return listTask.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = listNota[position]
+        val item = listTask[position]
         holder.bind(item)
     }
 
-    fun itemAdded(nota: Nota) {
-        listNota.add(1, nota)
+    fun itemAdded(task: Task) {
+        listTask.add(1, task)
         notifyItemInserted(1)
     }
 
-    fun itemUpdated(nota: Nota) {
-        val index = getIndex(nota)
-        listNota[index] = nota
+    fun itemUpdated(task: Task) {
+        val index = getIndex(task)
+        listTask[index] = task
         notifyItemChanged(index)
     }
 
-    fun itemDelete(nota: Nota) {
-        val index = getIndex(nota)
-        listNota.removeAt(index)
+    fun itemDelete(task: Task) {
+        val index = getIndex(task)
+        listTask.removeAt(index)
         notifyItemRemoved(index)
     }
 
-    private fun getIndex(nota: Nota): Int {
-        val foundData = listNota.first { it.id == nota.id }
-        return listNota.indexOf(foundData)
+    private fun getIndex(task: Task): Int {
+        val foundData = listTask.first { it.id == task.id }
+        return listTask.indexOf(foundData)
     }
 
-    fun setData(people: java.util.ArrayList<Nota>) {
-        this.listNota = people
+    fun setData(people: java.util.ArrayList<Task>) {
+        this.listTask = people
         notifyDataSetChanged()
     }
 
@@ -62,11 +62,11 @@ class NotaAdapter(
     }
 
     class ViewHolder(
-        private val binding: NotaItemLayoutBinding,
+        private val binding: TaskItemLayoutBinding,
         private val listener: OnNotaClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Nota) {
+        fun bind(item: Task) {
             binding.lblTitle.text = item.title
             binding.txtContent.setText(item.content)
             binding.checkBox.isChecked = item.isChecked
@@ -85,7 +85,7 @@ class NotaAdapter(
             setupEventListeners(item, listener)
         }
 
-        private fun setupEventListeners(item: Nota, listener: OnNotaClickListener) {
+        private fun setupEventListeners(item: Task, listener: OnNotaClickListener) {
             binding.btnRed.setOnClickListener {
                 listener.onNotaColorClickListener(
                     item,
@@ -169,8 +169,8 @@ class NotaAdapter(
     }
 
     public interface OnNotaClickListener {
-        fun onNotaEditClickListener(nota: Nota)
-        fun onNotaDeleteClickListener(nota: Nota)
-        fun onNotaColorClickListener(item: Nota, parseColor: Int)
+        fun onNotaEditClickListener(task: Task)
+        fun onNotaDeleteClickListener(task: Task)
+        fun onNotaColorClickListener(item: Task, parseColor: Int)
     }
 }

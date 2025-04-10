@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practico_1.R
 import com.example.practico_1.databinding.ActivityMainBinding
-import com.example.practico_1.models.Nota
-import com.example.practico_1.repositories.NotaRepository
-import com.example.practico_1.ui.adapters.NotaAdapter
+import com.example.practico_1.models.Task
+import com.example.practico_1.repositories.TaskRepository
+import com.example.practico_1.ui.adapters.TaskAdapter
 
-class MainActivity : AppCompatActivity(), NotaAdapter.OnNotaClickListener {
+class MainActivity : AppCompatActivity(), TaskAdapter.OnNotaClickListener {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var rvNotas: RecyclerView
+    private lateinit var rvTask: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,21 +26,21 @@ class MainActivity : AppCompatActivity(), NotaAdapter.OnNotaClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        rvNotas = binding.rvNotas
+        rvTask = binding.rvNotas
         setupRecyclerView()
         setupEventListeners()
     }
 
     private fun setupEventListeners() {
         binding.btnCreateNota.setOnClickListener {
-            val notas = NotaRepository.getNota()
-            val nota = Nota(notas.size+1, "","",false)
-            intentActivity(nota)
+            val notas = TaskRepository.getNota()
+            val task = Task(notas.size+1, "","",false)
+            intentActivity(task)
         }
     }
 
-    private fun intentActivity(nota: Nota) {
-        NotaFormActivity.detailIntent(this, nota).also {
+    private fun intentActivity(task: Task) {
+        TaskFormActivity.detailIntent(this, task).also {
             startActivity(it)
         }
     }
@@ -51,29 +51,29 @@ class MainActivity : AppCompatActivity(), NotaAdapter.OnNotaClickListener {
     }
 
     private fun reloadData() {
-        val notas = NotaRepository.getNota()
-        val adapter = rvNotas.adapter as NotaAdapter
-        adapter.setData(notas)
+        val tasks = TaskRepository.getNota()
+        val adapter = rvTask.adapter as TaskAdapter
+        adapter.setData(tasks)
     }
 
     private fun setupRecyclerView() {
-        rvNotas.adapter = NotaAdapter(NotaRepository.notas, this)
-        rvNotas.layoutManager = LinearLayoutManager(this)
+        rvTask.adapter = TaskAdapter(TaskRepository.tasks, this)
+        rvTask.layoutManager = LinearLayoutManager(this)
     }
 
-    override fun onNotaEditClickListener(nota: Nota) {
-        intentActivity(nota)
+    override fun onNotaEditClickListener(task: Task) {
+        intentActivity(task)
     }
 
-    override fun onNotaDeleteClickListener(nota: Nota) {
-        NotaRepository.deleteNota(nota)
+    override fun onNotaDeleteClickListener(task: Task) {
+        TaskRepository.deleteNota(task)
         reloadData()
     }
 
-    override fun onNotaColorClickListener(item: Nota, parseColor: Int) {
-        NotaRepository.getNotaById(item.id)?.let {
+    override fun onNotaColorClickListener(item: Task, parseColor: Int) {
+        TaskRepository.getNotaById(item.id)?.let {
             it.color = parseColor
-            NotaRepository.saveNota(it)
+            TaskRepository.saveNota(it)
             reloadData()
         }
     }
