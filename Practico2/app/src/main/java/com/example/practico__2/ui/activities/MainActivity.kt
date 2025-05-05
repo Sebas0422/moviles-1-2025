@@ -1,16 +1,14 @@
 package com.example.practico__2.ui.activities
 
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.practico__2.R
+import com.example.practico__2.databinding.ActivityMainBinding
 import com.example.practico__2.db.models.Ingrediente
 import com.example.practico__2.ui.adapters.IngredienteAdapter
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IngredienteAdapter.IngredienteClickListener {
 
     private val listaIngredientes = arrayListOf(
         Ingrediente("Tomate", 0),
@@ -25,21 +23,34 @@ class MainActivity : AppCompatActivity() {
         Ingrediente("Espinaca", 0)
     )
 
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val rv = findViewById<RecyclerView>(R.id.rvIngredientes)
-        val btnBuscar = findViewById<Button>(R.id.btnBuscar)
+        setupEventReciclerView()
+        setupEventListener()
+    }
 
-        rv.layoutManager = GridLayoutManager(this, 3)
-        rv.adapter = IngredienteAdapter(listaIngredientes) { ingrediente ->
-            ingrediente.seleccionado = !ingrediente.seleccionado
+    private fun setupEventReciclerView() {
+        binding.rvIngredientes.apply {
+            layoutManager = GridLayoutManager(this@MainActivity, 3)
+            adapter = IngredienteAdapter(listaIngredientes, this@MainActivity)
         }
+    }
 
-        btnBuscar.setOnClickListener {
+    private fun setupEventListener(){
+        binding.btnBuscar.setOnClickListener {
             val seleccionados = listaIngredientes.filter { it.seleccionado }
             Toast.makeText(this, "Seleccionados: ${seleccionados.map { it.nombre }}", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onIngredienteClick(position: Int, ingrediente: Ingrediente) {
+        ingrediente.seleccionado = !ingrediente.seleccionado
+        val adapter = binding.rvIngredientes.adapter as IngredienteAdapter
+        adapter.notifyItemListChanged(position)
     }
 }
