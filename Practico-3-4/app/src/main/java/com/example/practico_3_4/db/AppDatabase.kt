@@ -21,7 +21,6 @@ abstract class AppDatabase : RoomDatabase() {
                 AppDatabase::class.java,
                 "score-db"
             )
-                .fallbackToDestructiveMigration()
                 .build()
         }
     }

@@ -1,11 +1,8 @@
 package com.example.practico_3_4.ui.components
 
-import android.app.AlertDialog
-import android.widget.Toast
 import com.example.practico_3_4.models.Piece
-import com.example.practico_3_4.models.TetrominoType
+import com.example.practico_3_4.models.GameType
 import com.example.practico_3_4.ui.viewmodels.GamerViewModel
-import com.example.pruebatetris.databinding.ScoreSaveDialogBinding
 
 class TetrisGame(val width: Int = 10, val height: Int = 20) {
 
@@ -18,7 +15,7 @@ class TetrisGame(val width: Int = 10, val height: Int = 20) {
     init { spawnPiece() }
 
     fun spawnPiece() {
-        val piece = Piece(TetrominoType.entries.toTypedArray().random())
+        val piece = Piece(GameType.entries.toTypedArray().random())
         currentPiece = if (canMove(piece, 0, 0)) piece else {
             gameOver = true
             null

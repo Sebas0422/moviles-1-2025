@@ -13,7 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import com.example.practico_3_4.db.models.Score
-import com.example.practico_3_4.models.TetrominoType
+import com.example.practico_3_4.models.GameType
 import com.example.practico_3_4.ui.activities.ScoreListActivity
 import com.example.practico_3_4.ui.viewmodels.MainActivityViewModel
 import com.example.pruebatetris.databinding.ScoreSaveDialogBinding
@@ -58,6 +58,7 @@ class TetrisView : View {
     }
 
     fun startGameLoop() {
+        game.resetBoard()
         handler.post(dropRunnable)
     }
 
@@ -77,7 +78,7 @@ class TetrisView : View {
                 val paint = Paint().apply {
                     style = Paint.Style.FILL
                     color = if (value == 0) Color.LTGRAY
-                    else TetrominoType.entries[abs(value) - 1].color
+                    else GameType.entries[abs(value) - 1].color
                 }
 
                 val left = x * cellWidth.toFloat()
@@ -126,7 +127,7 @@ class TetrisView : View {
         val dialogBinding = ScoreSaveDialogBinding.inflate(layoutInflater)
 
         val dialog = AlertDialog.Builder(context)
-            .setTitle("Guardar Puntuación")
+            .setTitle("Guardar Puntuación: ${game.getViewModel()?.score?.value ?: 0}")
             .setView(dialogBinding.root)
             .setPositiveButton("Aceptar") { _, _ ->
                 val name = dialogBinding.txtNameAdd.editText?.text.toString()

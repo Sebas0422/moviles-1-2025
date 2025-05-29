@@ -30,9 +30,17 @@ class ScoreListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        setupEventListeners()
         setupReciclerView()
         setupViewModelObservers()
         viewModel.loadScores(this)
+    }
+
+    private fun setupEventListeners() {
+        binding.btnResetGame.setOnClickListener {
+            val intent = MainActivity.createIntent(this)
+            startActivity(intent)
+        }
     }
 
     private fun setupViewModelObservers() {

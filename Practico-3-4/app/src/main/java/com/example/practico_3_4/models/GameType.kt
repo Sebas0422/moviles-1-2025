@@ -2,7 +2,7 @@ package com.example.practico_3_4.models
 
 import android.graphics.Color
 
-enum class TetrominoType(val shapes: Array<Array<IntArray>>, val color: Int) {
+enum class GameType(val shapes: Array<Array<IntArray>>, val color: Int) {
     I(arrayOf(
         arrayOf(intArrayOf(1, 1, 1, 1)),
         arrayOf(intArrayOf(1), intArrayOf(1), intArrayOf(1), intArrayOf(1))

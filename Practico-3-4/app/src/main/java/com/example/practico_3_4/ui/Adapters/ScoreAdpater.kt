@@ -42,7 +42,7 @@ class ScoreAdpater(
     class ViewHolder(private val binding: ScoreItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Score) {
-            binding.txtName.text = "Nombre: $item.name"
+            binding.txtName.text = "Nombre: ${item.name}"
             binding.txtScoreNumber.text = "Puntuación: ${item.score}"
         }
     }

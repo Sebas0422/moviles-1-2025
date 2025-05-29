@@ -1,10 +1,9 @@
 package com.example.practico_3_4.models
 
 import android.graphics.Point
-import com.example.practico_3_4.models.TetrominoType
 
 data class Piece(
-    val type: TetrominoType,
+    val type: GameType,
     var position: Point = Point(3, 0),
     var rotation: Int = 0
 ) {
