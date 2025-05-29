@@ -1,8 +1,11 @@
 package com.example.practico_3_4.ui.components
 
+import android.app.AlertDialog
+import android.widget.Toast
 import com.example.practico_3_4.models.Piece
 import com.example.practico_3_4.models.TetrominoType
 import com.example.practico_3_4.ui.viewmodels.GamerViewModel
+import com.example.pruebatetris.databinding.ScoreSaveDialogBinding
 
 class TetrisGame(val width: Int = 10, val height: Int = 20) {
 
@@ -117,7 +120,12 @@ class TetrisGame(val width: Int = 10, val height: Int = 20) {
         this.viewModel = model
     }
 
+    fun getViewModel(): GamerViewModel? {
+        return viewModel
+    }
+
     fun resetBoard() {
         board = Array(height) { IntArray(width) { 0 } }
     }
+
 }

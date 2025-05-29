@@ -1,17 +1,23 @@
 package com.example.practico_3_4.ui.activities
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.practico_3_4.db.models.Score
 import com.example.practico_3_4.ui.components.TetrisGame
 import com.example.practico_3_4.ui.components.TetrisView
 import com.example.practico_3_4.ui.viewmodels.GamerViewModel
+import com.example.practico_3_4.ui.viewmodels.MainActivityViewModel
 import com.example.pruebatetris.databinding.ActivityMainBinding
+import com.example.pruebatetris.databinding.ScoreSaveDialogBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var tetrisView: TetrisView
     private val gameViewModel: GamerViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         setupEventListeners()
 
         tetrisView.startGameLoop()
+        tetrisView.setViewModel(viewModel)
     }
 
     private fun setupEventListeners() {
@@ -56,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

@@ -1,5 +1,6 @@
 package com.example.practico_3_4.ui.components
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
@@ -7,11 +8,15 @@ import android.graphics.Paint
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import com.example.practico_3_4.db.models.Score
 import com.example.practico_3_4.models.TetrominoType
-import com.example.practico_3_4.ui.viewmodels.GamerViewModel
+import com.example.practico_3_4.ui.activities.ScoreListActivity
+import com.example.practico_3_4.ui.viewmodels.MainActivityViewModel
+import com.example.pruebatetris.databinding.ScoreSaveDialogBinding
 import kotlin.math.abs
 
 class TetrisView : View {
@@ -21,6 +26,7 @@ class TetrisView : View {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    private lateinit var viewModel: MainActivityViewModel
 
     fun setGame(game: TetrisGame) {
         this.game = game
@@ -46,7 +52,7 @@ class TetrisView : View {
                 invalidate()
                 handler.postDelayed(this, dropInterval)
             }else{
-                Toast.makeText(context, "Game Over", Toast.LENGTH_SHORT).show()
+                showSaveScoreDialog(LayoutInflater.from(context), context)
             }
         }
     }
@@ -110,5 +116,29 @@ class TetrisView : View {
         } else {
             Toast.makeText(context, "Max Level Reached", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun setViewModel(viewModel: MainActivityViewModel) {
+        this.viewModel = viewModel
+    }
+
+    private fun showSaveScoreDialog(layoutInflater: LayoutInflater, context: Context) {
+        val dialogBinding = ScoreSaveDialogBinding.inflate(layoutInflater)
+
+        val dialog = AlertDialog.Builder(context)
+            .setTitle("Guardar Puntuación")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Aceptar") { _, _ ->
+                val name = dialogBinding.txtNameAdd.editText?.text.toString()
+                val score = game.getViewModel()?.score?.value ?: 0
+                val newScore = Score(score, name)
+                viewModel.saveScore(context, newScore)
+                val intent = ScoreListActivity.createIntent(context)
+                context.startActivity(intent)
+            }
+            .setNegativeButton("Cancelar", null)
+            .create()
+
+        dialog.show()
     }
 }
