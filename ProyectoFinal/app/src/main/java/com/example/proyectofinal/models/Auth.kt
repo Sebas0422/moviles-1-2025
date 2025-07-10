@@ -16,3 +16,10 @@ data class LoginResponse(
     val access_token: String
 )
 
+data class RegisterResponse(
+    val id: Int,
+    val name: String,
+    val email: String,
+    val profile: UserProfile
+)
+

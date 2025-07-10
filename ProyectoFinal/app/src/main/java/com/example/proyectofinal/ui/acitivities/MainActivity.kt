@@ -1,5 +1,7 @@
 package com.example.proyectofinal.ui.acitivities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -54,6 +56,17 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.lblRegister.setOnClickListener {
+            val intent = RegisterActivity.createIntent(this)
+            startActivity(intent)
+        }
+    }
+
+    companion object{
+        fun createIntent(context: Context): Intent {
+            return Intent(context, MainActivity::class.java)
         }
     }
 }
